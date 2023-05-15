@@ -1,0 +1,33 @@
+﻿@page
+@using FizzBuzzWeb.Forms;
+@model SearchHistoryModel
+@{
+    ViewData["Title"] = "Data in session";
+}
+<p>Dane w zapisane w sesji</p>
+<div class ="pages">
+
+    @foreach (var item in Model.PeoplePage)
+    {
+        <p>
+            @Html.DisplayFor(modelItem => item.login)
+            @Html.DisplayFor(modelItem => item.userID)
+            @Html.DisplayFor(modelItem => item.Number)
+            @Html.DisplayFor(modelItem => item.result)
+        </p>
+    }
+    @{
+        var prevDisabled = !Model.PeoplePage.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.PeoplePage.HasNextPage ? "disabled" : "";
+    }
+</div>
+<a asp-page="./SearchHistory"
+   asp-route-pageIndex="@(Model.PeoplePage.PageIndex - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./SearchHistory"
+   asp-route-pageIndex="@(Model.PeoplePage.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

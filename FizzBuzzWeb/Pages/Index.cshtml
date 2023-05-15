@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <form method="post">
+        <label asp-for="Person.Number"></label>
+        <input asp-for="Person.Number" /><br />
+        <span asp-validation-for="Person.Number" class="text-danger"></span>
+        <p></p>
+        <label asp-for="Person.username"></label>
+        <input asp-for="Person.username" /><br />
+        <button type="submit" onclick="myFunction()">Zatwierdź</button>
+        <span asp-validation-for="Person.username" class="text-danger"></span>
+        @if (Model.flag == 1)
+        {
+            <div class="alert alert-success" role="alert" id="myalert" visibility:hidden>
+                <p>@Model.Person.username, @Model.Person.Number - @Model.Person.result</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        <script>function myFunction() {
+  
+                 getElementById("myalert").style.visibility = "visible";
+                 
+            }</script>
+
+    </form>
+</div>
+
