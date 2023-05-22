@@ -6,7 +6,8 @@ namespace FizzBuzzWeb.Models
     public class Person
     {
         public int Id { get; set; }
-        
+        public bool IsActive { get; set; }
+
         [Display(Name = "Year")]
         [Required(ErrorMessage = "This field is required"), Range(1899, 2050, ErrorMessage = "Expected value {0} between {1} and {2}")]
         public int Number { get; set; }
