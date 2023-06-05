@@ -34,12 +34,12 @@ public class IndexModel : PageModel
             //_context = context;
             _personService = personService;
     }
-    public IList<Person> PeopleList { get; set; }
+    //public IList<Person> PeopleList { get; set; }
     public void OnGet()
     {
-            PeopleList = _personService.GetList();
+            //PeopleList = _personService.GetList();
             //Records = _personService.GetActivePeople();
-        }
+    }
     public IActionResult OnPost()
     {
 

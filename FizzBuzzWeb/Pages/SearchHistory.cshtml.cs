@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using FizzBuzzWeb.Interfaces;
 using FizzBuzzWeb.Services;
 using System.Linq;
+using FizzBuzzWeb.ViewModels;
+using System.Globalization;
 
 namespace FizzBuzzWeb.Pages
 {
@@ -19,14 +21,14 @@ namespace FizzBuzzWeb.Pages
 
         private readonly IPersonService _personService;
 
-        IQueryable<Person> query;
+        //IQueryable<Person> query;
 
         private readonly ILogger<SearchHistoryModel> _logger;
         [BindProperty]
-        public Person Person { get; set; }
-        public PaginatedList<Person> PeoplePage { get; set; }
+        //public Person Person { get; set; }
+        public PaginatedList<PersonVM> PeoplePage { get; set; }
 
-        public IList<Person> PeopleList { get; set; }
+        //public IList<Person> PeopleList { get; set; }
         public SearchHistoryModel(ILogger<SearchHistoryModel> logger, IPersonService personService)
         {
             _logger = logger;
@@ -35,12 +37,7 @@ namespace FizzBuzzWeb.Pages
         }
         public void OnGet(int pageIndex = 1)
         {
-            PeopleList = _personService.GetList();
-            query = PeopleList.AsQueryable();
-            query = query.OrderByDescending(s => s.date);
-            //PeoplePage = PaginatedList<Person>.CreateAsync(PeoplePage.OrderByDescending(s => s.date), pageIndex, 20);
-            //PeoplePage = PaginatedList<Person>.CreateAsync(_context.Person.AsQueryable().OrderByDescending(s => s.date), pageIndex, 20);
-            PeoplePage = PaginatedList<Person>.CreateAsync(query, pageIndex, 20);
+            PeoplePage = _personService.getPList(pageIndex);
         }
     }
 }

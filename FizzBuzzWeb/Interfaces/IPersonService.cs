@@ -1,4 +1,6 @@
-﻿using FizzBuzzWeb.Models;
+﻿using ContosoUniversity;
+using FizzBuzzWeb.Models;
+using FizzBuzzWeb.ViewModels;
 
 namespace FizzBuzzWeb.Interfaces
 {
@@ -6,6 +8,6 @@ namespace FizzBuzzWeb.Interfaces
     {
         //public IQueryable<Person> GetActivePeople();
         public void AddPerson(Person person);
-        public List<Person> GetList();
+        public PaginatedList<PersonVM> getPList(int pageIndex);
     }
 }

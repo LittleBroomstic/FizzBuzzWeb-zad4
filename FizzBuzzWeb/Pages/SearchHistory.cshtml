@@ -10,10 +10,9 @@
     @foreach (var item in Model.PeoplePage)
     {
         <p>
-            @Html.DisplayFor(modelItem => item.login)
+            @Html.DisplayFor(modelItem => item.Name)
             @Html.DisplayFor(modelItem => item.userID)
-            @Html.DisplayFor(modelItem => item.Number)
-            @Html.DisplayFor(modelItem => item.result)
+            @Html.DisplayFor(modelItem => item.Year)
         </p>
     }
     @{

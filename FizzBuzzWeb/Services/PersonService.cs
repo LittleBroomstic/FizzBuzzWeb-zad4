@@ -1,29 +1,44 @@
-﻿using FizzBuzzWeb.Data;
+﻿using ContosoUniversity;
+using FizzBuzzWeb.Data;
 using FizzBuzzWeb.Interfaces;
 using FizzBuzzWeb.Models;
+using FizzBuzzWeb.ViewModels;
+using Microsoft.VisualBasic;
 
 namespace FizzBuzzWeb.Services
 {
     public class PersonService : IPersonService
     {
-        private readonly PeopleContext _context;
-        public PersonService(PeopleContext context)
+        
+
+        private readonly IRepService _repService;
+        public PersonService(RepService context)
         {
-            _context = context;
+            _repService = context;
+        }
+        public PaginatedList<PersonVM> getPList(int pageIndex)
+        {
+            var query = _repService.GetPerson();
+
+            List<PersonVM> PeopleList = new List<PersonVM>();
+
+            foreach(var item in query)
+            {
+                var Data = new PersonVM
+                {
+                    Id = item.Id,
+                    userID = item.userID,
+                    Name = item.username,
+                    Year = item.Number,
+
+                };
+                PeopleList.Add(Data);
+            }
+            return PaginatedList<PersonVM>.Create(PeopleList, pageIndex, 20);
         }
         public void AddPerson(Person person)
         {
-            _context.Person.Add(person);
-            _context.SaveChanges();
+            _repService.AddPersonR(person);
         }
-        public List<Person> GetList()
-        {
-            return _context.Person.ToList();
-        }
-        //public IQueryable<Person> GetActivePeople()
-        //{
-        //    return
-        //    _context.Person.Where(p => p.IsActive);
-        //}
     }
 }
